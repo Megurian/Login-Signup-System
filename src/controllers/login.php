@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../system_modules/functions.php';
+require_once __DIR__ . '/../utils/functions.php';
 require_once __DIR__ . '/../db_modules/autoload_classes.php';
-require_once __DIR__ . '/../system_modules/session_start.php';
+require_once __DIR__ . '/../utils/session_start.php';
 
 $accountObj = new User();
 

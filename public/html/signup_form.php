@@ -1,5 +1,5 @@
 <?php
-require_once '../../src/system_modules/session_start.php'; 
+require_once '../../src/utils/session_start.php'; 
 
 $email =                $_SESSION['email'] ?? '';
 $first_name =           $_SESSION['first_name'] ?? '';

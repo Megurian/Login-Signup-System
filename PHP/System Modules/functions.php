@@ -5,3 +5,17 @@ function clean_input($input) {
 
     return $input; //return the now sanitize input
 }
+
+function extractUsername($email) {
+    // Use explode to split the email at the '@' character
+    $parts = explode('@', $email);
+
+    // Take the first part of the split email, which is the username
+    $username = $parts[0];
+
+    // Capitalize the username
+    $capitalizedUsername = strtoupper($username);
+
+    // Return the capitalized username
+    return $capitalizedUsername;
+}

@@ -63,7 +63,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $accountObj->password = $encrytedPassword;
         $accountObj->salt = $salt;
             
-        if($accountObj->addUser()) {
+        if($accountObj->userSignup()) {
             header('location: login.php');
         } else {
             echo '<script>alert("Something went wrong when signing up")</script>';

@@ -15,7 +15,7 @@ class User {
         $this->db = new Database();
     }
 
-    function addUser() {
+    function userSignup() {
         $sql = "INSERT INTO user (username, email, first_name, last_name, password, salt) VALUES (:username, :email, :first_name, :last_name, :password, :salt);";
 
         $prepQuery = $this->db->connect()->prepare($sql);
@@ -33,6 +33,8 @@ class User {
             return false;
         }
     }
+
+
 }
 
 /* $obj = new User();

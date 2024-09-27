@@ -2,11 +2,12 @@
 require_once 'database.php';
 
 class User {
-    public $username = 'EH202201078';
-    public $email = 'eh202201078';
-    public $first_name = 'Meg Ryan';
-    public $last_name = 'Gomez';
-    public $password = 'MegRyanPH244';
+    public $username = '';
+    public $email = '';
+    public $first_name = '';
+    public $last_name = '';
+    public $password = '';
+    public $salt = '';
 
     protected $db;
 
@@ -15,7 +16,7 @@ class User {
     }
 
     function addUser() {
-        $sql = "INSERT INTO user (username, email, first_name, last_name, password) VALUES (:username, :email, :first_name, :last_name, :password);";
+        $sql = "INSERT INTO user (username, email, first_name, last_name, password, salt) VALUES (:username, :email, :first_name, :last_name, :password, :salt);";
 
         $prepQuery = $this->db->connect()->prepare($sql);
 
@@ -24,6 +25,7 @@ class User {
         $prepQuery->bindParam(':first_name', $this->first_name);
         $prepQuery->bindParam(':last_name', $this->last_name);
         $prepQuery->bindParam(':password', $this->password);
+        $prepQuery->bindParam(':salt',$this->salt);
 
         if($prepQuery->execute()) {
             return true;

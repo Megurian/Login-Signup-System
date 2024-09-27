@@ -53,15 +53,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
        empty($passwordE) && empty($confirm_passwordE)) {
         
         $username = extractUsername($email);
-        $salt = bin2hex(random_bytes(16));
-        $encrytedPassword = modifiedPasswordHashing($confirm_password, $salt);
+        /* $salt = bin2hex(random_bytes(16)); */
+        $options = [
+            'cost' => 15    //this set the computational expense
+        ];
+        $encrytedPassword = password_hash($confirm_password, PASSWORD_DEFAULT, $options);
 
         $accountObj->username = $username;
         $accountObj->email = $email;
         $accountObj->first_name = $first_name;
         $accountObj->last_name = $last_name;
         $accountObj->password = $encrytedPassword;
-        $accountObj->salt = $salt;
+        /* $accountObj->salt = $salt; */
             
         if($accountObj->userSignup()) {
             header('location: login.php');

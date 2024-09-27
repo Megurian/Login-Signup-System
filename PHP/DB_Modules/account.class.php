@@ -35,33 +35,58 @@ class User {
         }
     }
 
-    function userLogin($email = null, $username = null, $password) {
+    function userLogin($email, $username, $password) {
         $sql = "SELECT * FROM user WHERE ";
 
+        //decide whether username/email to use
         if(!is_null($email)) {
             $sql .= "email = :email LIMIT 1;";
-            $identifier = $email;
+            $prepQuery = $this->db->connect()->prepare($sql);
+            $prepQuery->bindParam(':email', $email);
         } elseif (!is_null($username)) {
             $sql .= "username = :username LIMIT 1;";
-            $identifier = $username;
+            $prepQuery = $this->db->connect()->prepare($sql);
+            $prepQuery->bindParam(':username', $username);
         } else {
             return false;
         }
 
-        $prepQuery = $this->db->connect()->prepare($sql);
-        $prepQuery->bindParam(':identifier', $identifier);
-
         if($prepQuery->execute()) {
             $data = $prepQuery->fetch();
-            if($data && password_verify(modifiedPasswordHashing($password, $data['salt']), $data['password'])) {
+            if($data && password_verify($password, $data['password'])) {
+                
                 return true;
             }
         }
 
         return false; 
     }
+
+    function fetchUser($email, $username){
+        $sql = "SELECT * FROM user WHERE ";
+
+        if(!is_null($email)) {
+            $sql .= "email = :email LIMIT 1;";
+            $prepQuery = $this->db->connect()->prepare($sql);
+            $prepQuery->bindParam(':email', $email);
+        } elseif (!is_null($username)) {
+            $sql .= "username = :username LIMIT 1;";
+            $prepQuery = $this->db->connect()->prepare($sql);
+            $prepQuery->bindParam(':username', $username);
+        } else {
+            return false;
+        }
+
+
+        $data = null;
+        if($prepQuery->execute()){
+            $data = $prepQuery->fetch();
+        }
+
+        return $data;
+    }
 }
 
 $obj = new User();
-/* $obj->userLogin(null, 1 ,1); */
+/* $obj->userLogin('eh202201078@wmsu.edu.ph', null ,'MegRyanPH244'); */
 /* $obj->addUser(); */

@@ -31,3 +31,4 @@ function modifiedPasswordHashing($password, $salt) {
     
     return $encrypted;
 }
+

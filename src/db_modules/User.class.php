@@ -1,6 +1,5 @@
 <?php
 require_once 'database.php';
-require_once 'C:\xampp\htdocs\LoginSignup System\PHP\System Modules\functions.php';
 
 class User {
     public $username = '';

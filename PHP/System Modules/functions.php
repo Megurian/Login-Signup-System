@@ -19,3 +19,15 @@ function extractUsername($email) {
     // Return the capitalized username
     return $capitalizedUsername;
 }
+
+function modifiedPasswordHashing($password, $salt) {
+    $pepper = 'SaltnPaperGoesWell';
+    $options = [
+        'cost' => 15    //this set the computational expense
+    ];
+
+    $encrypted = hash('sha256', $password . $salt . $pepper);
+    $encrypted = password_hash($encrypted, PASSWORD_DEFAULT, $options);
+    
+    return $encrypted;
+}

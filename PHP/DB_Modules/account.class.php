@@ -1,5 +1,6 @@
 <?php
 require_once 'database.php';
+require_once 'C:\xampp\htdocs\LoginSignup System\PHP\System Modules\functions.php';
 
 class User {
     public $username = '';
@@ -34,8 +35,33 @@ class User {
         }
     }
 
+    function userLogin($email = null, $username = null, $password) {
+        $sql = "SELECT * FROM user WHERE ";
 
+        if(!is_null($email)) {
+            $sql .= "email = :email LIMIT 1;";
+            $identifier = $email;
+        } elseif (!is_null($username)) {
+            $sql .= "username = :username LIMIT 1;";
+            $identifier = $username;
+        } else {
+            return false;
+        }
+
+        $prepQuery = $this->db->connect()->prepare($sql);
+        $prepQuery->bindParam(':identifier', $identifier);
+
+        if($prepQuery->execute()) {
+            $data = $prepQuery->fetch();
+            if($data && password_verify(modifiedPasswordHashing($password, $data['salt']), $data['password'])) {
+                return true;
+            }
+        }
+
+        return false; 
+    }
 }
 
-/* $obj = new User();
-$obj->addUser(); */
+$obj = new User();
+/* $obj->userLogin(null, 1 ,1); */
+/* $obj->addUser(); */

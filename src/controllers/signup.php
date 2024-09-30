@@ -30,13 +30,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $first_nameE = 'First name is required to signup';
     } elseif(is_numeric($first_name)) {
         $first_nameE = 'Enter a valid first name';
+    } elseif(strlen($first_name) <= 1) {
+        $first_nameE = 'Enter a valid first name';
     }
 
     //Validation Last name
     if(empty($last_name)) {
-        $last_nameE = 'First name is required to signup';
+        $last_nameE = 'Last name is required to signup';
     } elseif(is_numeric($last_name)) {
-        $last_nameE = 'Enter a valid first name';
+        $last_nameE = 'Enter a valid last name';
+    } elseif(strlen($last_name) <= 1) {
+        $last_nameE = 'Enter a valid last name';
     }
 
     //Validation Password

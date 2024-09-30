@@ -22,11 +22,11 @@ unset($_SESSION['login_error']);
         <hr><br>
         
         <label for="email_username">Enter email or username:</label><br>
-        <input type="text" name="email_username" placeholder="Enter your email or username">
+        <input type="text" name="email_username" placeholder="Enter your email or username" value="">
         <br>
 
         <label for="password">Enter your password:</label><br>
-        <input type="password" name="password">
+        <input type="password" name="password" value="">
         <br>
 
         <input type="submit" value="Login" style="background-color: rgb(109, 202, 55);">

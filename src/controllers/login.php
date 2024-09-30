@@ -10,13 +10,14 @@ $password = '';
 $loginE = '';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if(filter_var($_POST['email_username'])){
+    if(filter_var($_POST['email_username'], FILTER_VALIDATE_EMAIL)){
         $email = clean_input($_POST['email_username']);
-        var_dump($email);
+        $_SESSION['email'] = $email;
     } else {
         $username = clean_input($_POST['email_username']);
-        var_dump($username);
+        $_SESSION['username'] = $username;
     }
+
     $password = clean_input($_POST['password']);
 
 
@@ -24,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "UserLogin is working";
         $data = $accountObj->fetchUser($email, $username);
         $_SESSION['account'] = $data;
-        header("Location: /PHP/Web%20Pages/dashboard.php");
+        header("Location: ..\..\public\html\customer_dashboard.php");
         
     } else {
         $loginE = 'Invalid username/password';

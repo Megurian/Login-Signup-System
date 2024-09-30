@@ -55,10 +55,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         $username = extractUsername($email);
         /* $salt = bin2hex(random_bytes(16)); */
-        $options = [
-            'cost' => 15    //this set the computational expense
-        ];
-        $encrytedPassword = password_hash($confirm_password, PASSWORD_DEFAULT, $options);
+
+        $encrytedPassword = password_hash($confirm_password, PASSWORD_ARGON2ID,['memory_cost' => 2048, 'time_cost' => 4, 'threads' => 2]);    //this set the computational expense
+
 
         $accountObj->username = $username;
         $accountObj->email = $email;

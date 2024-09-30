@@ -31,6 +31,11 @@ unset($_SESSION['login_error']);
 
         <input type="submit" value="Login" style="background-color: rgb(109, 202, 55);">
     </form>
+    <br>
+    <div style="display: flex; justify-content: space-evenly;">
+        <a href="signup_form.php">Create an Account</a>
+        <a href="">Forgot Password?</a>
+    </div>
     
 </body>
 </html>

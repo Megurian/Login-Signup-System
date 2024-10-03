@@ -48,6 +48,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $passwordE = 'Password is required to signup';
     } elseif(strlen($password) < 8) {
         $passwordE = 'Enter atleast 8 characters password';
+    } elseif(!preg_match('/[0-9]/', $password) || 
+             !preg_match('/[A-Z]/', $password) || 
+             !preg_match('/[a-z]/', $password) || 
+             !preg_match('/[^a-zA-Z\d]/', $password)) {
+        $passwordE = 'Password must contain at least 1 number, 1 uppercase, 1 lowercase, 1 special';
+    } elseif(strpos($password, $first_name) !== false || 
+             strpos($password, $last_name) !== false || 
+             strpos($password, $username) !== false) {
+        $passwordE = 'Weak password, please try a different password';
     } elseif(empty($confirm_password)) {
         $confirm_passwordE = 'Please confirm your password';
     } elseif($confirm_password != $password) {
